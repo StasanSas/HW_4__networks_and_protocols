@@ -14,7 +14,7 @@ def parse_in_dict_arguments(arguments):
             "ip": arguments.ip[0], "protocol": arguments.protocol[0]}
 
 
-def get_type_internet_protocol_protocol(ip):
+def get_type_internet_protocol(ip):
     ip_protocol = ip_address(ip)
     if isinstance(ip_protocol, IPv4Address):
         return "ipv4"
@@ -63,7 +63,7 @@ packet_func = \
         ("ipv6", "tcp"): lambda ip, ttl, port: IPv6(dst=ip, hlim=ttl) / TCP(dport=port),
         ("ipv6", "icmp"): lambda ip, ttl, port: IPv6(dst=ip, hlim=ttl) / ICMPv6EchoRequest(),
     }
-internet_protocol = get_type_internet_protocol_protocol(arguments["ip"])
+internet_protocol = get_type_internet_protocol(arguments["ip"])
 
 ttl = 1
 while ttl < arguments["number_requests"]:
